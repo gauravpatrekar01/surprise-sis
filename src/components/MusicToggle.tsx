@@ -7,7 +7,7 @@ export const MusicToggle: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    audioRef.current = new Audio('/audio/background.mp3');
+    audioRef.current = new Audio('/audio/tum-tak.mp3');
     audioRef.current.loop = true;
     audioRef.current.volume = 0.3;
 

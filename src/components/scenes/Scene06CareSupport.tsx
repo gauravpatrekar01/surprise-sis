@@ -7,18 +7,18 @@ interface Props {
   onNext: () => void;
 }
 
-export const Scene06ThreeSisters: React.FC<Props> = ({ onNext }) => {
+export const Scene06CareSupport: React.FC<Props> = ({ onNext }) => {
   const [phase, setPhase] = useState<'lines' | 'reveal' | 'button'>('lines');
   const [lineIndex, setLineIndex] = useState(0);
   const [revealIndex, setRevealIndex] = useState(0);
 
-  const { lines, reveal, button } = content.threeSisters;
+  const { lines, reveal, button } = content.careSupport;
 
   useEffect(() => {
     if (phase === 'lines' && lineIndex < lines.length) {
       const timer = setTimeout(() => {
         setLineIndex(prev => prev + 1);
-      }, 3500);
+      }, lineIndex === lines.length - 2 ? 4000 : 3500); // Wait longer on "I'll be there."
       return () => clearTimeout(timer);
     } else if (phase === 'lines' && lineIndex === lines.length) {
       const timer = setTimeout(() => {
@@ -56,7 +56,9 @@ export const Scene06ThreeSisters: React.FC<Props> = ({ onNext }) => {
               initial="hidden"
               animate="visible"
               exit={{ opacity: 0, filter: "blur(10px)", transition: { duration: 1.5 } }}
-              className="text-2xl md:text-4xl font-serif text-white/90 leading-relaxed absolute"
+              className={`text-2xl md:text-4xl font-serif leading-relaxed absolute ${
+                lineIndex >= lines.length - 2 ? 'text-brand-gold italic' : 'text-white/90'
+              }`}
             >
               {lines[lineIndex]}
             </motion.h2>
@@ -69,9 +71,7 @@ export const Scene06ThreeSisters: React.FC<Props> = ({ onNext }) => {
               initial="hidden"
               animate="visible"
               exit={{ opacity: 0, filter: "blur(10px)", transition: { duration: 1.5 } }}
-              className={`text-2xl md:text-4xl font-serif leading-relaxed absolute whitespace-pre-line ${
-                revealIndex >= 3 ? 'text-brand-gold text-glow' : 'text-white/90'
-              }`}
+              className="text-2xl md:text-4xl font-serif text-white/90 leading-relaxed absolute whitespace-pre-line"
             >
               {reveal[revealIndex]}
             </motion.h2>
@@ -89,7 +89,7 @@ export const Scene06ThreeSisters: React.FC<Props> = ({ onNext }) => {
           >
             <button
               onClick={onNext}
-              className="px-8 py-3 rounded-full bg-white/5 border border-white/20 text-white/70 hover:bg-white/10 hover:border-white/40 transition-all font-sans tracking-widest text-sm uppercase"
+              className="px-8 py-3 rounded-full bg-white/5 border border-white/20 text-white/70 hover:bg-white/10 hover:border-white/40 hover:scale-105 active:scale-95 transition-all font-sans tracking-widest text-sm uppercase"
             >
               {button}
             </button>

@@ -133,7 +133,6 @@ export const Scene04Quiz: React.FC<Props> = ({ onNext }) => {
               className="font-sans text-white/50 space-y-2 mb-16 text-sm"
             >
               <p>{conclusion[2]}</p>
-              <p>{conclusion[3]}</p>
             </motion.div>
 
             <motion.div

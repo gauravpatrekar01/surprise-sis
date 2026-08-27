@@ -23,9 +23,9 @@ export const content = {
     title: "IDENTITY CHECK",
     checks: [
       "Checking name...",
-      "Checking childhood chaos...",
-      "Checking arguments...",
-      "Checking annoying habits...",
+      "Checking childhood memories...",
+      "Checking your sense of humor...",
+      "Checking how much you care...",
       "Checking how much you're loved..."
     ],
     getConclusion: (name: string) => [
@@ -43,51 +43,50 @@ export const content = {
     title: "Let's see how well you know your brother.",
     questions: [
       {
-        q: "Who is more annoying?",
+        q: "Who is more likely to check if the other is okay?",
         options: [
           { text: "Me", response: "Interesting answer." },
           { text: "You", response: "Bold choice." },
-          { text: "Both of us", response: "Probably the most accurate." }
+          { text: "Both of us", response: "I'll allow it." }
         ]
       },
       {
-        q: "Who is more likely to start an argument?",
+        q: "Who is more likely to give advice?",
         options: [
-          { text: "Me", response: "At least you admit it." },
-          { text: "You", response: "I'll pretend I agree." },
-          { text: "We both know the answer", response: "Yes, yes we do." }
+          { text: "Me", response: "That answer has been recorded." },
+          { text: "You", response: "Noted." },
+          { text: "Depends on the situation", response: "Probably true." }
         ]
       },
       {
-        q: "Who would win in an argument?",
+        q: "Who knows when something is wrong without being told?",
         options: [
-          { text: "Me", response: "Keep dreaming." },
-          { text: "You", response: "Finally, some respect." },
-          { text: "Nobody. We'd just keep arguing.", response: "The sad reality." }
+          { text: "Me", response: "You're very perceptive." },
+          { text: "You", response: "I try my best." },
+          { text: "We both do", response: "That's how it should be." }
         ]
       },
       {
-        q: "Who gets away with more?",
+        q: "Who would answer a call at 2 AM?",
         options: [
-          { text: "Me", response: "Unfair, but true." },
-          { text: "You", response: "That's definitely a lie." },
-          { text: "Definitely you", response: "I strongly disagree." }
+          { text: "Me", response: "I appreciate that." },
+          { text: "You", response: "Always." },
+          { text: "Hopefully both", response: "Absolutely." }
         ]
       },
       {
-        q: "Who is more important?",
+        q: "Who knows the other better?",
         options: [
-          { text: "Me", response: "Typical." },
-          { text: "You", response: "I appreciate the honesty." },
-          { text: "That's not even a question.", response: "Exactly." }
+          { text: "Me", response: "Bold claim." },
+          { text: "You", response: "I like to think so." },
+          { text: "Still undecided", response: "Fair enough." }
         ]
       }
     ],
     conclusion: [
-      "Sister status confirmed.",
-      "100% Certified Sister",
-      "Scientific accuracy: questionable.",
-      "Brother's confidence: absolute."
+      "Connection confirmed.",
+      "Care level: 100%",
+      "Sibling bond: permanently active."
     ],
     button: "Okay, now the serious part →"
   },
@@ -95,40 +94,38 @@ export const content = {
   appreciation: {
     lines: [
       "Okay...",
-      "Enough jokes.",
-      "There are some things\nI don't say often enough.",
+      "There's something I don't say often enough.",
       "Thank you.",
-      "For being there.",
+      "For always being there.",
+      "For the little things you do.",
+      "For caring even when you don't have to.",
       "For listening.",
-      "For putting up with me.",
-      "For making ordinary days better.",
-      "For being someone I can always call family."
+      "For supporting the people you love.",
+      "For being someone I can count on."
     ],
     interruption: [
-      "And yes...",
-      "Sometimes you are incredibly annoying.",
-      "Okay...",
-      "Quite often.",
-      "But that's part of the deal.",
-      "I wouldn't change it."
+      "And I hope you know...",
+      "I care about you more than I probably say."
     ],
     button: "Continue →"
   },
 
-  threeSisters: {
+  careSupport: {
     lines: [
-      "Three sisters.",
-      "Three completely different personalities.",
-      "Three different kinds of chaos.",
-      "But somehow...",
-      "We became one family."
+      "One thing I want you to remember.",
+      "You don't have to have everything figured out.",
+      "You don't have to handle everything alone.",
+      "Whenever you need someone...",
+      "I'll be there.",
+      "Always."
     ],
     reveal: [
-      "Different stories.",
-      "Different dreams.",
-      "Different lives.",
-      "But one bond.",
-      "And that bond is something\nI'll always be grateful for."
+      "I'll always be cheering for you.",
+      "I'll always want to see you happy.",
+      "I'm proud of how far you've come.",
+      "I hope you always believe in yourself.",
+      "Whatever life brings...",
+      "You'll always have my support."
     ],
     button: "Continue →"
   },
@@ -139,6 +136,10 @@ export const content = {
       "This wasn't just a random website.",
       "This was made for one reason.",
       "Raksha Bandhan.",
+      "Some bonds are difficult to explain.",
+      "They simply exist.",
+      "They grow with you.",
+      "They stay with you.",
       "A thread can be small.",
       "But what it represents...",
       "never is.",
@@ -159,18 +160,15 @@ export const content = {
   finalLetter: {
     getLines: (name: string) => [
       `Dear ${name},`,
-      "We may argue.",
-      "We may annoy each other.",
-      "We may disagree.",
-      "And sometimes we may drive each other crazy.",
-      "But at the end of the day...",
-      "You are my sister.",
-      "And that's something\nI'll always be grateful for.",
-      "Life will change.",
-      "We'll grow older.",
-      "Our paths will change.",
-      "But no matter where life takes us...",
-      "You'll always have a brother\nwho is rooting for you.",
+      "I may not always say everything out loud...",
+      "But I hope you know how much I care about you.",
+      "I hope you always have the courage\nto chase what makes you happy.",
+      "I hope you believe in yourself\neven on the difficult days.",
+      "And whenever you need someone\nto stand beside you...",
+      "I'll be there.",
+      "Always.",
+      "I'll always be proud of you.",
+      "And I'll always want to see you happy.",
       `Happy Raksha Bandhan, ${name}.`
     ],
     name: (name: string) => name,

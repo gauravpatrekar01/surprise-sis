@@ -7,7 +7,7 @@ import { Scene02NameReveal } from './components/scenes/Scene02NameReveal';
 import { Scene03IdentityCheck } from './components/scenes/Scene03IdentityCheck';
 import { Scene04Quiz } from './components/scenes/Scene04Quiz';
 import { Scene05EmotionalShift } from './components/scenes/Scene05EmotionalShift';
-import { Scene06ThreeSisters } from './components/scenes/Scene06ThreeSisters';
+import { Scene06CareSupport } from './components/scenes/Scene06CareSupport';
 import { Scene07RakhiReveal } from './components/scenes/Scene07RakhiReveal';
 import { Scene08GiftReveal } from './components/scenes/Scene08GiftReveal';
 import { Scene09FinalLetter } from './components/scenes/Scene09FinalLetter';
@@ -55,7 +55,7 @@ function App() {
             <Scene05EmotionalShift key="scene5" onNext={nextScene} />
           )}
           {currentScene === 6 && (
-            <Scene06ThreeSisters key="scene6" onNext={nextScene} />
+            <Scene06CareSupport key="scene6" onNext={nextScene} />
           )}
           {currentScene === 7 && (
             <Scene07RakhiReveal key="scene7" name={sisterName} onNext={nextScene} />
