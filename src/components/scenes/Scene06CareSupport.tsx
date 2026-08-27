@@ -7,16 +7,36 @@ interface Props {
 }
 
 export const Scene06CareSupport: React.FC<Props> = ({ onNext }) => {
-  const [showButton, setShowButton] = useState(false);
+  const [phase, setPhase] = useState<'lines' | 'reveal' | 'button'>('lines');
+  const [lineIndex, setLineIndex] = useState(0);
+  const [revealIndex, setRevealIndex] = useState(0);
 
   const { lines, reveal, button } = content.careSupport;
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowButton(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (phase === 'lines' && lineIndex < lines.length) {
+      const timer = setTimeout(() => {
+        setLineIndex(prev => prev + 1);
+      }, lineIndex === lines.length - 2 ? 4000 : 3500);
+      return () => clearTimeout(timer);
+    } else if (phase === 'lines' && lineIndex === lines.length) {
+      const timer = setTimeout(() => {
+        setPhase('reveal');
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [phase, lineIndex, lines.length]);
+
+  useEffect(() => {
+    if (phase === 'reveal' && revealIndex < reveal.length) {
+      const timer = setTimeout(() => {
+        setRevealIndex(prev => prev + 1);
+      }, 3500);
+      return () => clearTimeout(timer);
+    } else if (phase === 'reveal' && revealIndex === reveal.length) {
+      setPhase('button');
+    }
+  }, [phase, revealIndex, reveal.length]);
 
   return (
     <motion.div 
@@ -26,41 +46,40 @@ export const Scene06CareSupport: React.FC<Props> = ({ onNext }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 2 }}
     >
-      <div className="max-w-3xl mx-auto text-center w-full space-y-8">
-        
-        <div className="space-y-6">
-          {lines.map((line, index) => (
+      <div className="max-w-3xl mx-auto text-center w-full min-h-[200px] flex items-center justify-center">
+        <AnimatePresence mode="wait">
+          {phase === 'lines' && lineIndex < lines.length && (
             <motion.h2
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.8 }}
+              key={`line-${lineIndex}`}
+              initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -15, filter: "blur(6px)" }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
               className={`text-2xl md:text-4xl font-serif leading-relaxed ${
-                index >= lines.length - 2 ? 'text-brand-gold italic' : 'text-white/90'
+                lineIndex >= lines.length - 2 ? 'text-brand-gold italic' : 'text-white/90'
               }`}
             >
-              {line}
+              {lines[lineIndex]}
             </motion.h2>
-          ))}
-        </div>
+          )}
 
-        <div className="space-y-6 mt-12 pt-8 border-t border-white/10">
-          {reveal.map((line, index) => (
+          {phase === 'reveal' && revealIndex < reveal.length && (
             <motion.h2
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 + index * 0.2, duration: 0.8 }}
+              key={`reveal-${revealIndex}`}
+              initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -15, filter: "blur(6px)" }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
               className="text-2xl md:text-4xl font-serif text-white/90 leading-relaxed whitespace-pre-line"
             >
-              {line}
+              {reveal[revealIndex]}
             </motion.h2>
-          ))}
-        </div>
+          )}
+        </AnimatePresence>
       </div>
 
       <AnimatePresence>
-        {showButton && (
+        {phase === 'button' && (
           <motion.div 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 

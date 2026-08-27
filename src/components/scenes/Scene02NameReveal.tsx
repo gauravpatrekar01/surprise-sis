@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { content } from '../../data/content';
-import { slowReveal, staggerContainer, fadeIn } from '../../animations/variants';
 
 interface Props {
   name: string;
@@ -9,15 +8,23 @@ interface Props {
 }
 
 export const Scene02NameReveal: React.FC<Props> = ({ name, onNext }) => {
+  const [currentLine, setCurrentLine] = useState(0);
   const [showButton, setShowButton] = useState(false);
   const lines = content.nameReveal.getLines(name);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowButton(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (currentLine < lines.length) {
+      const timer = setTimeout(() => {
+        setCurrentLine(prev => prev + 1);
+      }, 3000);
+      return () => clearTimeout(timer);
+    } else {
+      const buttonTimer = setTimeout(() => {
+        setShowButton(true);
+      }, 1000);
+      return () => clearTimeout(buttonTimer);
+    }
+  }, [currentLine, lines.length]);
 
   return (
     <motion.div 
@@ -26,21 +33,24 @@ export const Scene02NameReveal: React.FC<Props> = ({ name, onNext }) => {
       animate="visible"
       exit="hidden"
     >
-      <motion.div variants={fadeIn} className="text-center max-w-2xl mx-auto space-y-8">
-        {lines.map((line, i) => (
-          <motion.h1 
-            key={i} 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.3, duration: 0.8 }}
-            className={`font-serif text-3xl md:text-5xl leading-relaxed ${
-              i === 0 ? 'text-brand-gold text-glow scale-110' : 'text-white/80'
-            }`}
-          >
-            {line}
-          </motion.h1>
-        ))}
-      </motion.div>
+      <div className="text-center max-w-2xl mx-auto min-h-[200px] flex items-center justify-center">
+        <AnimatePresence mode="wait">
+          {currentLine < lines.length && (
+            <motion.h1 
+              key={currentLine}
+              initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -15, filter: "blur(6px)" }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className={`font-serif text-3xl md:text-5xl leading-relaxed ${
+                currentLine === 0 ? 'text-brand-gold text-glow scale-110' : 'text-white/80'
+              }`}
+            >
+              {lines[currentLine]}
+            </motion.h1>
+          )}
+        </AnimatePresence>
+      </div>
 
       {showButton && (
         <motion.div 
