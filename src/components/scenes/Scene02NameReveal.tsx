@@ -15,9 +15,9 @@ export const Scene02NameReveal: React.FC<Props> = ({ name, onNext }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowButton(true);
-    }, lines.length * 2000 + 1000);
+    }, 3000);
     return () => clearTimeout(timer);
-  }, [lines.length]);
+  }, []);
 
   return (
     <motion.div 
@@ -26,12 +26,14 @@ export const Scene02NameReveal: React.FC<Props> = ({ name, onNext }) => {
       animate="visible"
       exit="hidden"
     >
-      <motion.div variants={staggerContainer} className="text-center max-w-2xl mx-auto">
+      <motion.div variants={fadeIn} className="text-center max-w-2xl mx-auto space-y-8">
         {lines.map((line, i) => (
           <motion.h1 
             key={i} 
-            variants={slowReveal} 
-            className={`font-serif text-3xl md:text-5xl leading-relaxed mb-12 ${
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.3, duration: 0.8 }}
+            className={`font-serif text-3xl md:text-5xl leading-relaxed ${
               i === 0 ? 'text-brand-gold text-glow scale-110' : 'text-white/80'
             }`}
           >
@@ -42,9 +44,8 @@ export const Scene02NameReveal: React.FC<Props> = ({ name, onNext }) => {
 
       {showButton && (
         <motion.div 
-          initial="hidden" 
-          animate="visible" 
-          variants={fadeIn}
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
           className="absolute bottom-20"
         >
           <button

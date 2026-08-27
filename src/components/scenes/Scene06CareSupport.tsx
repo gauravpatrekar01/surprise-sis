@@ -1,43 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { content } from '../../data/content';
-import { slowReveal } from '../../animations/variants';
 
 interface Props {
   onNext: () => void;
 }
 
 export const Scene06CareSupport: React.FC<Props> = ({ onNext }) => {
-  const [phase, setPhase] = useState<'lines' | 'reveal' | 'button'>('lines');
-  const [lineIndex, setLineIndex] = useState(0);
-  const [revealIndex, setRevealIndex] = useState(0);
+  const [showButton, setShowButton] = useState(false);
 
   const { lines, reveal, button } = content.careSupport;
 
   useEffect(() => {
-    if (phase === 'lines' && lineIndex < lines.length) {
-      const timer = setTimeout(() => {
-        setLineIndex(prev => prev + 1);
-      }, lineIndex === lines.length - 2 ? 4000 : 3500); // Wait longer on "I'll be there."
-      return () => clearTimeout(timer);
-    } else if (phase === 'lines' && lineIndex === lines.length) {
-      const timer = setTimeout(() => {
-        setPhase('reveal');
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [phase, lineIndex, lines.length]);
-
-  useEffect(() => {
-    if (phase === 'reveal' && revealIndex < reveal.length) {
-      const timer = setTimeout(() => {
-        setRevealIndex(prev => prev + 1);
-      }, 3500);
-      return () => clearTimeout(timer);
-    } else if (phase === 'reveal' && revealIndex === reveal.length) {
-      setPhase('button');
-    }
-  }, [phase, revealIndex, reveal.length]);
+    const timer = setTimeout(() => {
+      setShowButton(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <motion.div 
@@ -47,40 +26,41 @@ export const Scene06CareSupport: React.FC<Props> = ({ onNext }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 2 }}
     >
-      <div className="max-w-3xl mx-auto text-center w-full relative h-[300px] flex items-center justify-center">
-        <AnimatePresence mode="wait">
-          {phase === 'lines' && lineIndex < lines.length && (
+      <div className="max-w-3xl mx-auto text-center w-full space-y-8">
+        
+        <div className="space-y-6">
+          {lines.map((line, index) => (
             <motion.h2
-              key={`line-${lineIndex}`}
-              variants={slowReveal}
-              initial="hidden"
-              animate="visible"
-              exit={{ opacity: 0, filter: "blur(10px)", transition: { duration: 1.5 } }}
-              className={`text-2xl md:text-4xl font-serif leading-relaxed absolute ${
-                lineIndex >= lines.length - 2 ? 'text-brand-gold italic' : 'text-white/90'
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2, duration: 0.8 }}
+              className={`text-2xl md:text-4xl font-serif leading-relaxed ${
+                index >= lines.length - 2 ? 'text-brand-gold italic' : 'text-white/90'
               }`}
             >
-              {lines[lineIndex]}
+              {line}
             </motion.h2>
-          )}
+          ))}
+        </div>
 
-          {phase === 'reveal' && revealIndex < reveal.length && (
+        <div className="space-y-6 mt-12 pt-8 border-t border-white/10">
+          {reveal.map((line, index) => (
             <motion.h2
-              key={`reveal-${revealIndex}`}
-              variants={slowReveal}
-              initial="hidden"
-              animate="visible"
-              exit={{ opacity: 0, filter: "blur(10px)", transition: { duration: 1.5 } }}
-              className="text-2xl md:text-4xl font-serif text-white/90 leading-relaxed absolute whitespace-pre-line"
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 + index * 0.2, duration: 0.8 }}
+              className="text-2xl md:text-4xl font-serif text-white/90 leading-relaxed whitespace-pre-line"
             >
-              {reveal[revealIndex]}
+              {line}
             </motion.h2>
-          )}
-        </AnimatePresence>
+          ))}
+        </div>
       </div>
 
       <AnimatePresence>
-        {phase === 'button' && (
+        {showButton && (
           <motion.div 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 

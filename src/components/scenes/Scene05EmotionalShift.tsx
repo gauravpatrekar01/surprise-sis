@@ -1,81 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { content } from '../../data/content';
-import { slowReveal } from '../../animations/variants';
 
 interface Props {
   onNext: () => void;
 }
 
 export const Scene05EmotionalShift: React.FC<Props> = ({ onNext }) => {
-  const [currentLine, setCurrentLine] = useState(0);
-  const [showInterruption, setShowInterruption] = useState(false);
-  const [interruptionIndex, setInterruptionIndex] = useState(-1);
   const [showButton, setShowButton] = useState(false);
 
   const { lines, interruption, button } = content.appreciation;
 
   useEffect(() => {
-    if (!showInterruption && currentLine < lines.length) {
-      const timer = setTimeout(() => {
-        setCurrentLine(prev => prev + 1);
-      }, currentLine === 0 ? 3000 : 4000); // Wait longer on the first lines
-      return () => clearTimeout(timer);
-    } else if (!showInterruption && currentLine === lines.length) {
-      setTimeout(() => setShowInterruption(true), 3000);
-    }
-  }, [currentLine, lines.length, showInterruption]);
-
-  useEffect(() => {
-    if (showInterruption && interruptionIndex < interruption.length) {
-      const timer = setTimeout(() => {
-        setInterruptionIndex(prev => prev + 1);
-      }, 3000);
-      return () => clearTimeout(timer);
-    } else if (showInterruption && interruptionIndex === interruption.length) {
-      setTimeout(() => setShowButton(true), 2000);
-    }
-  }, [showInterruption, interruptionIndex, interruption.length]);
+    const timer = setTimeout(() => {
+      setShowButton(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <motion.div 
       className="min-h-screen flex flex-col items-center justify-center p-6 relative"
-      initial={{ opacity: 0, backgroundColor: '#0a0304' }} // Slightly darker for emotional shift
+      initial={{ opacity: 0, backgroundColor: '#0a0304' }}
       animate={{ opacity: 1, backgroundColor: 'transparent' }}
       exit="hidden"
       transition={{ duration: 2 }}
     >
-      <div className="max-w-3xl mx-auto text-center w-full relative h-[400px] flex items-center justify-center">
+      <div className="max-w-3xl mx-auto text-center w-full space-y-8">
         
-        {!showInterruption ? (
-          <AnimatePresence mode="wait">
+        <div className="space-y-6">
+          {lines.map((line, index) => (
             <motion.h2
-              key={currentLine}
-              variants={slowReveal}
-              initial="hidden"
-              animate="visible"
-              exit={{ opacity: 0, filter: "blur(10px)", transition: { duration: 1.5 } }}
-              className="text-2xl md:text-4xl font-serif text-white/90 leading-relaxed whitespace-pre-line absolute"
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2, duration: 0.8 }}
+              className="text-2xl md:text-4xl font-serif text-white/90 leading-relaxed whitespace-pre-line"
             >
-              {lines[currentLine]}
+              {line}
             </motion.h2>
-          </AnimatePresence>
-        ) : (
-          <AnimatePresence mode="wait">
+          ))}
+        </div>
+
+        <div className="space-y-6 mt-12 pt-8 border-t border-white/10">
+          {interruption.map((line, index) => (
             <motion.h2
-              key={`int-${interruptionIndex}`}
-              variants={slowReveal}
-              initial="hidden"
-              animate="visible"
-              exit={{ opacity: 0, filter: "blur(5px)", transition: { duration: 1 } }}
-              className={`text-2xl md:text-4xl font-serif leading-relaxed absolute ${
-                interruptionIndex === 1 || interruptionIndex === 3 ? 'text-brand-gold italic' : 'text-white/90'
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 + index * 0.2, duration: 0.8 }}
+              className={`text-2xl md:text-4xl font-serif leading-relaxed ${
+                index === 1 || index === 3 ? 'text-brand-gold italic' : 'text-white/90'
               }`}
             >
-              {interruption[interruptionIndex]}
+              {line}
             </motion.h2>
-          </AnimatePresence>
-        )}
+          ))}
+        </div>
         
       </div>
 
