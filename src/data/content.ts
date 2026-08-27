@@ -3,17 +3,19 @@ export const content = {
     lines: [
       "There is someone\nI want to talk to...",
       "Someone very special.",
-      "Maybe that's you.",
+      "Someone who probably doesn't\nknow this is about her.",
+      "Maybe that's you."
     ],
     inputPlaceholder: "Enter your name...",
     button: "Begin →"
   },
-  
+
   nameReveal: {
     getLines: (name: string) => [
       `${name}...`,
       "Yes.",
-      "This is for you.",
+      "I was hoping you'd enter your name.",
+      "This little surprise is for you.",
       "Come in."
     ],
     button: "Continue →"
@@ -32,68 +34,124 @@ export const content = {
       "Identity confirmed.",
       "You are a sister.",
       "More specifically...",
-      `You are ${name}.`,
+      `You are ${name} Di.`,
       "Access granted."
     ],
     button: "Continue →"
   },
 
   sisterTest: {
-    preTitle: "Before we continue...",
-    title: "Let's see how well you know your brother.",
+    preTitle: "Okay, now for something very important...",
+    title: "How well do you really know Gaurav?",
+
     questions: [
       {
-        q: "Who is more likely to check if the other is okay?",
+        q: "First of all... how is Gaurav?",
         options: [
-          { text: "Me", response: "Interesting answer." },
-          { text: "You", response: "Bold choice." },
-          { text: "Both of us", response: "I'll allow it." }
+          {
+            text: "Very good",
+            response: "Correct. Excellent start."
+          },
+          {
+            text: "Very, very good",
+            response: "Now we're talking."
+          },
+          {
+            text: "The best",
+            response: "Okay, you clearly know me very well."
+          }
         ]
       },
+
       {
-        q: "Who is more likely to give advice?",
+        q: "What is Gaurav's most underrated quality?",
         options: [
-          { text: "Me", response: "That answer has been recorded." },
-          { text: "You", response: "Noted." },
-          { text: "Depends on the situation", response: "Probably true." }
+          {
+            text: "His intelligence",
+            response: "A strong answer. Very strong."
+          },
+          {
+            text: "His personality",
+            response: "I was hoping someone would notice."
+          },
+          {
+            text: "Everything, obviously",
+            response: "Perfect. No corrections needed."
+          }
         ]
       },
+
       {
-        q: "Who knows when something is wrong without being told?",
+        q: "If Gaurav gives advice, how good is it?",
         options: [
-          { text: "Me", response: "You're very perceptive." },
-          { text: "You", response: "I try my best." },
-          { text: "We both do", response: "That's how it should be." }
+          {
+            text: "Pretty good",
+            response: "I'll accept that."
+          },
+          {
+            text: "Actually very good",
+            response: "Thank you for recognizing talent."
+          },
+          {
+            text: "Life-changing",
+            response: "Please remain seated. This is getting emotional."
+          }
         ]
       },
+
       {
-        q: "Who would answer a call at 2 AM?",
+        q: "How lucky are you to have Gaurav as your brother?",
         options: [
-          { text: "Me", response: "I appreciate that." },
-          { text: "You", response: "Always." },
-          { text: "Hopefully both", response: "Absolutely." }
+          {
+            text: "Quite lucky",
+            response: "Correct, but you can do better."
+          },
+          {
+            text: "Extremely lucky",
+            response: "That's more accurate."
+          },
+          {
+            text: "The luckiest",
+            response: "Finally. Someone is being honest."
+          }
         ]
       },
+
       {
-        q: "Who knows the other better?",
+        q: "Final question: What makes Gaurav so special?",
         options: [
-          { text: "Me", response: "Bold claim." },
-          { text: "You", response: "I like to think so." },
-          { text: "Still undecided", response: "Fair enough." }
+          {
+            text: "He's smart",
+            response: "True."
+          },
+          {
+            text: "He's kind",
+            response: "Also true."
+          },
+          {
+            text: "He's Gaurav",
+            response: "Exactly. No further explanation required."
+          }
         ]
       }
     ],
+
     conclusion: [
-      "Connection confirmed.",
-      "Care level: 100%",
-      "Sibling bond: permanently active."
+      "Test complete.",
+      "Knowledge about Gaurav: impressive.",
+      "Your answers: mostly correct.",
+      "My confidence: completely unaffected.",
+      "Final result:",
+      "You officially know your brother."
     ],
-    button: "Okay, now the serious part →"
+
+    button: "Okay, enough about me →"
   },
 
   appreciation: {
     lines: [
       "Okay...",
+      "Enough testing.",
       "There's something I don't say often enough.",
       "Thank you.",
       "For always being there.",
@@ -101,13 +159,19 @@ export const content = {
       "For caring even when you don't have to.",
       "For listening.",
       "For supporting the people you love.",
-      "For being someone I can count on."
+      "For being someone I can count on.",
+      "And honestly...",
+      "Life is just a little better with you in it."
     ],
+
     interruption: [
-      "And I hope you know...",
-      "I care about you more than I probably say."
+      "Of course, you're still my sister...",
+      "So naturally, you have a lifetime membership to annoy me.",
+      "But that's okay.",
+      "I wouldn't have it any other way."
     ],
-    button: "Continue →"
+
+    button: "There's more →"
   },
 
   careSupport: {
@@ -115,19 +179,25 @@ export const content = {
       "One thing I want you to remember.",
       "You don't have to have everything figured out.",
       "You don't have to handle everything alone.",
-      "Whenever you need someone...",
+      "Whenever life feels a little too much...",
+      "You can always count on me.",
       "I'll be there.",
       "Always."
     ],
+
     reveal: [
       "I'll always be cheering for you.",
       "I'll always want to see you happy.",
-      "I'm proud of how far you've come.",
+      "I'll always be proud of how far you've come.",
       "I hope you always believe in yourself.",
+      "I hope you never stop chasing the things that make you happy.",
+      "And whenever you need someone...",
+      "I'll be here.",
       "Whatever life brings...",
       "You'll always have my support."
     ],
-    button: "Continue →"
+
+    button: "There's one more thing →"
   },
 
   rakhiReveal: {
@@ -135,7 +205,7 @@ export const content = {
       "Maybe you've figured it out by now.",
       "This wasn't just a random website.",
       "This was made for one reason.",
-      "Raksha Bandhan.",
+      "Raksha Bandhan 🥰",
       "Some bonds are difficult to explain.",
       "They simply exist.",
       "They grow with you.",
@@ -143,37 +213,74 @@ export const content = {
       "A thread can be small.",
       "But what it represents...",
       "never is.",
-      `Happy Raksha Bandhan, ${name}.`
+      "It's a reminder that no matter where life takes us...",
+      "you'll always have someone who cares about you.",
+      `Happy Raksha Bandhan, ${name} Di.`
     ],
-    button: "Continue →"
+
+    button: "There's still a surprise →"
   },
 
   giftReveal: {
     lines: [
       "You thought that was the surprise?",
       "No.",
+      "I wouldn't make it that easy.",
       "There's one more thing."
     ],
+
     button: "Open Your Gift →"
   },
 
   finalLetter: {
     getLines: (name: string) => [
-      `Dear ${name},`,
+      `Dear ${name} Di,`,
+
       "I may not always say everything out loud...",
+
       "But I hope you know how much I care about you.",
-      "I hope you always have the courage\nto chase what makes you happy.",
-      "I hope you believe in yourself\neven on the difficult days.",
-      "And whenever you need someone\nto stand beside you...",
+
+      "You've always been someone\nI want to see happy and doing well.",
+
+      "I'm proud of the person you're becoming.",
+
+      "And I hope you always have the courage\nto chase the things you truly want.",
+
+      "There will be good days.\nThere will be difficult ones too.",
+
+      "But whenever you need someone\nto stand beside you...",
+
       "I'll be there.",
-      "Always.",
+
+      "To listen.",
+
+      "To support you.",
+
+      "To remind you that you're capable.",
+
+      "And sometimes...\nprobably to give you advice you didn't ask for.",
+
+      "Because that's what brothers are for.",
+
+      "No matter how much life changes...",
+
+      "I hope one thing never changes:",
+
+      "You'll always have my support.",
+
       "I'll always be proud of you.",
+
       "And I'll always want to see you happy.",
-      `Happy Raksha Bandhan, ${name}.`
+
+      `Happy Raksha Bandhan, ${name} Di.`
     ],
+
     name: (name: string) => name,
+
     signatureOutro: "Always your brother,",
+
     signatureName: "Gaurav",
+
     footer: "Made especially for you."
   }
 };
